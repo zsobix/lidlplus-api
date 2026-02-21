@@ -1,4 +1,4 @@
-jwkest
+pyjwkest
 requests
 playwright
 qrcode
