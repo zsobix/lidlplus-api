@@ -30,7 +30,7 @@ jobs:
         run: |
           # NOTE: put your own distribution build steps here.
           python -m pip install --upgrade pip
-          pip install setuptools wheel
+          pip install setuptools wheel build
           python setup.py sdist bdist_wheel
 
       - name: Upload distributions
