@@ -2,3 +2,5 @@ pyjwkest
 requests
 playwright
 qrcode
+pillow
+
