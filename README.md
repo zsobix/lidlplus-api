@@ -250,14 +250,6 @@ lidl.login(email="YOUR_EMAIL", password="YOUR_PASSWORD")
 
 ---
 
-## Tip
-
-If you really want to, here’s my Ko-fi link: https://ko-fi.com/zsobix
-
-You don’t need to, but it’s a huge motivation for me to keep developing this.
-
----
-
 ## Legal Notice
 
-This application is an open source project written in Python, which uses the API of the Lidl Plus application, owned by Lidl Stiftung & Co. KG. The application was created solely for educational [...]
+This application is an open source project written in Python, which uses the API of the Lidl Plus application, owned by **Lidl Stiftung & Co. KG**. The application was created solely for educational purposes and is not affiliated with Lidl Stiftung & Co. KG. The creator of the application is not affiliated with Lidl Stiftung & Co. KG. in any way and does not derive any financial benefits from this project. All trademarks, trade names, and logos are the property of their respective owners. Users use the application at their own risk.
