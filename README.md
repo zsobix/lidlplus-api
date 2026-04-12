@@ -1,139 +1,263 @@
 # lidlplus-api
-The Lidl Plus API (in Python)
 
-Fork of https://github.com/Andre0512/lidl-plus
-## Installing
+A Python wrapper for the Lidl Plus app API.
 
-Install Python 3.12+
+This project is a fork of: https://github.com/Andre0512/lidl-plus
 
-Install the python package `pip install lidlplus-api`
+---
 
-Run `playwright install`
+## Requirements
 
-Install all dependencies that playwright requires
+- Python **3.12+**
+- Playwright (plus its required system dependencies)
 
-Done!
+---
+
+## Installation
+
+1. Install the package:
+
+   ```bash
+   pip install lidlplus-api
+   ```
+
+2. Install Playwright browsers:
+
+   ```bash
+   playwright install
+   ```
+
+3. Install system dependencies required by Playwright (varies by OS).
+
+---
+
+## Quick start
+
+```python
+from lidlplus_api import api
+
+lidl = api.LidlPlusApi(
+    language="YOUR_LANGUAGE_CODE",
+    country="YOUR_COUNTRY_CODE",
+    # optional:
+    refresh_token="YOUR_REFRESH_TOKEN",
+)
+
+lidl.login(email="YOUR_EMAIL", password="YOUR_PASSWORD")
+```
+
+---
 
 ## Usage
-1. Import "lidlplus_api" in your project
-2. ???
-3. profit
 
-## Functions
-`lidl = api.LidlPlusApi(language="YOUR_LANGUAGE_CODE", country="YOUR_COUNTRY_CODE", (and optionally) refresh_token="YOUR_REFRESH_TOKEN")`
-
-Initialize the LidlPlusApi class
-
----
-`lidl.login(email="YOUR_EMAIL", password="YOUR_PASSWORD")`
-
-Login to your Lidl Plus account using playwright
-
----
-`lidl.receipts(only_favourite=False, pageNumber=1)`
-
-Get all receipts from your account in 25 receipt chunks
-
----
-`lidl.receipt(ticket_id)`
-
-Get the specific receipt with the ticket id (returned from lidl.receipts, id field)
-
----
-`lidl.coupons(store_id)`
-
-Get all coupons from account with the specified store id (returned from lidl.get_stores)
-
----
-`lidl.activate_coupon(coupon_id)`
-
-Activate the specified coupon using the coupon id (returned from lidl.coupons)
-
----
-`lidl.deactivate_coupon(coupon_id)`
-
-Deactivate the specified coupon using the coupon id (returned from lidl.coupons)
-
----
-`lidl.start_couponplus()`
-
-EXPERIMENTAL PROBABLY DOESN'T WORK!!! Starts the coupon plus program for your account
-
----
-`lidl.couponplus(store_id)`
-
-DOESN'T WORK!!! Gets the information for the current month's coupon plus program with the store id (returned from lidl.get_stores)
-
----
-`lidl.purchaseLottery_details(coupon_id)`
-
-Gets the information about the scratch card/fortune wheel promotion with the coupon id (returned from lidl.home(store_id)["purchaseLottery"][0]["id"])
-
----
-`lidl.redeem_purchaseLottery(coupon_id)`
-
-Redeems the specifed scratch card/fortune wheel promotion with the coupon id (returned from lidl.home(store_id)["purchaseLottery"][0]["id"])
-
----
-`lidl.purchaseLottery_status(coupon_id)`
-
-Gets the status (redeemed coupon id, or nothing if no prize) of the scratch card/fortune wheel promotions with the coupon id (returned from lidl.home(store_id)["purchaseLottery"][0]["id"])
-
----
-`lidl.loyalty_id`
-
-Gets the account's loyalty id
+1. Import `lidlplus_api` in your project
+2. Use the `LidlPlusApi` methods below
 
 ---
 
-`lidl.generate_loyalty_id()`
+## API reference
 
-Generates the qr code of the loyalty id
+### Create client
 
----
-`lidl.get_stores()`
+- **Constructor**
 
-Gets all the stores in the your specified country
+  ```python
+  lidl = api.LidlPlusApi(
+      language="YOUR_LANGUAGE_CODE",
+      country="YOUR_COUNTRY_CODE",
+      refresh_token="YOUR_REFRESH_TOKEN",  # optional
+  )
+  ```
 
----
-`lidl.offers(store_id)`
-
-Gets all the offers with the store id (returned from lidl.get_stores())
-
----
-`lidl.brochures(store_id)`
-
-Gets all brochures with the store id (returned from lidl.get_stores())
+  Initializes the `LidlPlusApi` client.
 
 ---
-`lidl.translations()`
 
-Gets all translation keys and translations in your specified language
+### Authentication
 
----
-`lidl.activecoupons_count(store_id)`
+- **Login (Playwright)**
 
-Gets the number of active coupons with the store id (returned from lidl.get_stores())
+  ```python
+  lidl.login(email="YOUR_EMAIL", password="YOUR_PASSWORD")
+  ```
 
----
-`lidl.home(store_id)`
-
-Gets all the home page data when the lidl plus app is loaded
+  Logs in to your Lidl Plus account using Playwright.
 
 ---
-`lidl.store_schedule(store_id)`
 
-Gets today's store schedule with the store id (returned from lidl.get_stores())
+### Receipts
+
+- **List receipts (paged, 25 per page)**
+
+  ```python
+  lidl.receipts(only_favourite=False, pageNumber=1)
+  ```
+
+- **Get a specific receipt**
+
+  ```python
+  lidl.receipt(ticket_id)
+  ```
+
+  `ticket_id` comes from `lidl.receipts()` (`id` field).
 
 ---
-`lidl.store_details(store_id)`
 
-Gets the specified store details with the store id (returned from lidl.get_stores())
+### Coupons
+
+- **List coupons for a store**
+
+  ```python
+  lidl.coupons(store_id)
+  ```
+
+  `store_id` comes from `lidl.get_stores()`.
+
+- **Activate a coupon**
+
+  ```python
+  lidl.activate_coupon(coupon_id)
+  ```
+
+- **Deactivate a coupon**
+
+  ```python
+  lidl.deactivate_coupon(coupon_id)
+  ```
+
+  `coupon_id` comes from `lidl.coupons()`.
+
+---
+
+### Coupon Plus (experimental)
+
+- **Start Coupon Plus**
+
+  ```python
+  lidl.start_couponplus()
+  ```
+
+  EXPERIMENTAL — probably doesn’t work.
+
+- **Coupon Plus status/info**
+
+  ```python
+  lidl.couponplus(store_id)
+  ```
+
+  DOESN’T WORK — fetches info for the current month’s Coupon Plus (store from `lidl.get_stores()`).
+
+---
+
+### Scratch card / Fortune wheel (purchaseLottery)
+
+- **Promotion details**
+
+  ```python
+  lidl.purchaseLottery_details(coupon_id)
+  ```
+
+- **Redeem promotion**
+
+  ```python
+  lidl.redeem_purchaseLottery(coupon_id)
+  ```
+
+- **Promotion status**
+
+  ```python
+  lidl.purchaseLottery_status(coupon_id)
+  ```
+
+  `coupon_id` comes from:
+  `lidl.home(store_id)["purchaseLottery"][0]["id"]`
+
+---
+
+### Loyalty
+
+- **Get loyalty id**
+
+  ```python
+  lidl.loyalty_id
+  ```
+
+- **Generate loyalty QR code**
+
+  ```python
+  lidl.generate_loyalty_id()
+  ```
+
+---
+
+### Stores / Offers / Brochures
+
+- **List stores**
+
+  ```python
+  lidl.get_stores()
+  ```
+
+- **Offers for a store**
+
+  ```python
+  lidl.offers(store_id)
+  ```
+
+- **Brochures for a store**
+
+  ```python
+  lidl.brochures(store_id)
+  ```
+
+---
+
+### Translations
+
+- **Get translation keys**
+
+  ```python
+  lidl.translations()
+  ```
+
+---
+
+### Misc
+
+- **Active coupons count**
+
+  ```python
+  lidl.activecoupons_count(store_id)
+  ```
+
+- **Home page data**
+
+  ```python
+  lidl.home(store_id)
+  ```
+
+- **Today’s store schedule**
+
+  ```python
+  lidl.store_schedule(store_id)
+  ```
+
+- **Store details**
+
+  ```python
+  lidl.store_details(store_id)
+  ```
+
+---
+
 ## Tip
 
-If you really want to, here's my ko-fi link: https://ko-fi.com/zsobix
+If you really want to, here’s my Ko-fi link: https://ko-fi.com/zsobix
 
-You don't need to, but it's a huge motivation for me to keep developing this.
+You don’t need to, but it’s a huge motivation for me to keep developing this.
+
+---
 
 ## Legal Notice
-This application is an open source project written in Python, which uses the API of the Lidl Plus application, owned by Lidl Stiftung & Co. KG. The application was created solely for educational purposes and is not affiliated with Lidl Stiftung & Co. KG. The creator of the application is not affiliated with Lidl Stiftung & Co. KG. in any way and does not derive any financial benefits from this project. All trademarks, trade names, and logos are the property of their respective owners. Users use the application at their own risk.
+
+This application is an open source project written in Python, which uses the API of the Lidl Plus application, owned by Lidl Stiftung & Co. KG. The application was created solely for educational [...]
