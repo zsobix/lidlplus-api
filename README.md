@@ -4,9 +4,9 @@ The Lidl Plus API (in Python)
 Fork of https://github.com/Andre0512/lidl-plus
 ## Installing
 
-Clone this repo `git clone https://github.com/Zsobix/lidlplus-api`
+Install Python 3.12+
 
-Install all requirements `pip install -r requirements.txt`
+Install the python package `pip install lidlplus-api`
 
 Run `playwright install`
 
@@ -15,10 +15,9 @@ Install all dependencies that playwright requires
 Done!
 
 ## Usage
-1. Install Python 3
-2. Import "api" in your project
-3. ???
-4. profit
+1. Import "lidlplus_api" in your project
+2. ???
+3. profit
 
 ## Functions
 `lidl = api.LidlPlusApi(language="YOUR_LANGUAGE_CODE", country="YOUR_COUNTRY_CODE", (and optionally) refresh_token="YOUR_REFRESH_TOKEN")`
