@@ -15,11 +15,19 @@ This project is a fork of: https://github.com/Andre0512/lidl-plus
 
 ## Installation
 
-1. Install the package:
+1. a) Install the package:
 
    ```bash
-   pip install lidlplus-api
+   pip install lidlplus-api[auth]
    ```
+   b)
+   > If you use an OS/Distro that doesn't support playwright, and you want to use this with the refresh token, install:
+   
+   
+      ```bash
+      pip install lidlplus-api
+      ```
+
 
 2. Install Playwright browsers:
 
