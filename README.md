@@ -32,7 +32,7 @@ This project is a fork of: https://github.com/Andre0512/lidl-plus
 2. Install Playwright browsers:
 
    ```bash
-   playwright install
+   playwright install chromium
    ```
 
 3. Install system dependencies required by Playwright (varies by OS).
