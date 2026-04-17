@@ -42,9 +42,9 @@ This project is a fork of: https://github.com/Andre0512/lidl-plus
 ## Quick start
 
 ```python
-from lidlplus_api import api
+from lidlplus_api import LidlPlusApi
 
-lidl = api.LidlPlusApi(
+lidl = LidlPlusApi(
     language="YOUR_LANGUAGE_CODE",
     country="YOUR_COUNTRY_CODE",
     # optional:
@@ -70,7 +70,7 @@ lidl.login(email="YOUR_EMAIL", password="YOUR_PASSWORD")
 - **Constructor**
 
   ```python
-  lidl = api.LidlPlusApi(
+  lidl = LidlPlusApi(
       language="YOUR_LANGUAGE_CODE",
       country="YOUR_COUNTRY_CODE",
       refresh_token="YOUR_REFRESH_TOKEN",  # optional
