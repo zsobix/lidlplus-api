@@ -151,7 +151,7 @@ class LidlPlusApi:
     def login(self, email, password, **kwargs):
         """Simulate app auth"""
         with sync_playwright() as p:
-            browser = p.firefox.launch(headless=False)
+            browser = p.chromium.launch(headless=False)
             page = browser.new_page()
             response = page.goto(self._register_link)
             page.wait_for_timeout(random.randint(476, 975))
