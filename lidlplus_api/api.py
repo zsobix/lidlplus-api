@@ -355,6 +355,16 @@ class LidlPlusApi:
         kwargs = {"headers": self._default_headers(requiresStoreIDs=True, store_id=store_id), "timeout": 10}
         return requests.get(url, **kwargs).json()
     
+    def shoppinglists(self, store_id):
+        url = "https://shopping-list.lidlplus.com/api/v4/lists"
+        kwargs = {"headers": self._default_headers(requiresCountryAndStoreID=True, store_id=store_id), "timeout": 10}
+        return requests.get(url, **kwargs).json()
+    
+    def shoppinglist(self, shoppinglist_id, store_id, body={"items":[],"list":{"itemIds":[],"deletedItems":[]}}):
+        url = f"https://shopping-list.lidlplus.com/api/v4/lists/{shoppinglist_id}"
+        kwargs = {"headers": self._default_headers(requiresCountryAndStoreID=True, store_id=store_id), "timeout": 10}
+        return requests.patch(url, json=body, **kwargs).json()
+    
     #def get_coupon_details(self, coupon_id):
     #    url = f"https://coupons.lidlplus.com/app/api/v4/promotionsdetails/{coupon_id}"
     #    kwargs = {"headers": self._default_headers(requiresCountryAndStoreID=True), "timeout": 10}
